@@ -14,9 +14,14 @@ function pickDefaultWeek(games) {
   return weeks[weeks.length - 1]
 }
 
+function possessiveName(name) {
+  const upper = (name ?? 'Your').toUpperCase()
+  return upper.endsWith('S') ? `${upper}'` : `${upper}'S`
+}
+
 export default function WeeklyPicks({ session, profile }) {
   const userId = session.user.id
-  const firstName = (profile?.full_name ?? session.user.email ?? 'Your').split(' ')[0]
+  const displayName = profile?.full_name ?? session.user.email?.split('@')[0]
   const [games, setGames] = useState([])
   const [picks, setPicks] = useState({}) // game_id -> pick row
   const [teamColors, setTeamColors] = useState({}) // team name -> { primary_color, secondary_color }
@@ -106,7 +111,7 @@ export default function WeeklyPicks({ session, profile }) {
       <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
         <div>
           <h1 className="font-display font-bold text-3xl text-chalk tracking-wide">
-            {firstName}&apos;S PICKS
+            {possessiveName(displayName)} PICKS
           </h1>
           <p className="text-chalkDim text-sm font-mono mt-1">
             Week {selectedWeek}
