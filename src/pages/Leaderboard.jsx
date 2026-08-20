@@ -86,7 +86,8 @@ export default function Leaderboard() {
           .select('*')
           .eq('season', SEASON)
           .order('total_points', { ascending: false })
-          .order('win_pct', { ascending: false }),
+          .order('win_pct', { ascending: false })
+          .order('full_name', { ascending: true }),
         supabase.from('pickem_games').select('status').eq('season', SEASON),
         supabase.from('pickem_weekly_standings').select('*').order('week', { ascending: false }),
       ])
@@ -129,10 +130,52 @@ export default function Leaderboard() {
   if (!rows.length) {
     return (
       <div className="text-center py-16">
-        <p className="font-display font-bold text-2xl text-chalk">STANDINGS ARE EMPTY</p>
+        <p className="font-display font-bold text-2xl text-chalk">NO ONE&apos;S SIGNED UP YET</p>
         <p className="text-chalkDim text-sm mt-2">
-          They'll fill in once picks start getting scored.
+          Once people sign in for the first time, they&apos;ll show up here.
         </p>
+      </div>
+    )
+  }
+
+  const hasAnyActivity = rows.some((r) => r.scored_picks > 0)
+
+  if (!hasAnyActivity) {
+    return (
+      <div>
+        <h1 className="font-display font-bold text-3xl text-chalk tracking-wide mb-1">
+          WHO&apos;S PLAYING
+        </h1>
+        <p className="text-chalkDim text-sm font-mono mb-6">
+          {rows.length} {rows.length === 1 ? 'person has' : 'people have'} signed up. Standings will
+          appear here once the first week&apos;s games are final.
+        </p>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {rows.map((r) => (
+            <div
+              key={r.user_id}
+              className={`flex items-center gap-3 bg-panel border rounded-md shadow-sm p-3 ${
+                r.user_id === meId ? 'border-amber' : 'border-line'
+              }`}
+            >
+              <div className="w-10 h-10 rounded-full overflow-hidden border border-line bg-panelLight shrink-0">
+                {r.avatar_url ? (
+                  <img src={r.avatar_url} alt="" className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-chalkDim font-mono text-sm">
+                    {initials(r.full_name)}
+                  </div>
+                )}
+              </div>
+              <div className="min-w-0">
+                <p className={`font-medium truncate ${r.user_id === meId ? 'text-amber' : 'text-chalk'}`}>
+                  {r.full_name}
+                </p>
+                {r.department && <p className="text-chalkDim text-xs truncate">{r.department}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     )
   }
