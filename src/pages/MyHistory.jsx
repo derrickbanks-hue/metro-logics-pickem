@@ -54,7 +54,7 @@ export default function MyHistory({ session }) {
           const scored = picks.filter((p) => p.is_correct !== null)
           const correct = scored.filter((p) => p.is_correct).length
           return (
-            <div key={week} className="bg-panel border border-line rounded-md overflow-hidden">
+            <div key={week} className="bg-panel border border-line rounded-md overflow-hidden shadow-sm">
               <div className="flex items-center justify-between px-4 py-3 border-b border-line">
                 <span className="font-mono text-sm text-chalk uppercase">Week {week}</span>
                 {scored.length > 0 && (
