@@ -17,6 +17,7 @@ export default function WeeklyPicks({ session }) {
   const userId = session.user.id
   const [games, setGames] = useState([])
   const [picks, setPicks] = useState({}) // game_id -> pick row
+  const [teamColors, setTeamColors] = useState({}) // team name -> { primary_color, secondary_color }
   const [selectedWeek, setSelectedWeek] = useState(null)
   const [loading, setLoading] = useState(true)
   const [saveState, setSaveState] = useState('idle') // idle | saving | saved | error
@@ -34,10 +35,17 @@ export default function WeeklyPicks({ session }) {
       .select('*')
       .eq('user_id', userId)
 
+    const { data: colorRows } = await supabase
+      .from('pickem_team_colors')
+      .select('*')
+
     setGames(gameRows ?? [])
     const pickMap = {}
     for (const p of pickRows ?? []) pickMap[p.game_id] = p
     setPicks(pickMap)
+    const colorMap = {}
+    for (const c of colorRows ?? []) colorMap[c.team] = c
+    setTeamColors(colorMap)
     setSelectedWeek((current) => current ?? pickDefaultWeek(gameRows ?? []))
     setLoading(false)
   }
@@ -126,7 +134,7 @@ export default function WeeklyPicks({ session }) {
 
       <div className="grid gap-3 sm:grid-cols-2">
         {weekGames.map((g) => (
-          <GameCard key={g.id} game={g} pick={picks[g.id]} onPick={handlePick} />
+          <GameCard key={g.id} game={g} pick={picks[g.id]} onPick={handlePick} teamColors={teamColors} />
         ))}
       </div>
     </div>
