@@ -100,7 +100,7 @@ export default function WeeklyPicks({ session, profile }) {
       <div className="text-center py-16">
         <p className="font-display font-bold text-2xl text-chalk">NO GAMES SYNCED YET</p>
         <p className="text-chalkDim text-sm mt-2">
-          Check back once this week's SEC and Big Ten slate has loaded.
+          Check back once this week's SEC slate has loaded.
         </p>
       </div>
     )
