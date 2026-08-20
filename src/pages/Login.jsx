@@ -41,7 +41,7 @@ export default function Login() {
         </div>
 
         {status === 'sent' ? (
-          <div className="bg-panel border border-line rounded-md p-6 text-center">
+          <div className="bg-panel border border-line rounded-md shadow-sm p-6 text-center">
             <p className="text-chalk font-medium">Check your inbox</p>
             <p className="text-chalkDim text-sm mt-2">
               We sent a sign-in link to <span className="text-chalk">{email}</span>. Open it on
@@ -49,7 +49,7 @@ export default function Login() {
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="bg-panel border border-line rounded-md p-6 space-y-4">
+          <form onSubmit={handleSubmit} className="bg-panel border border-line rounded-md shadow-sm p-6 space-y-4">
             <div>
               <label className="block text-xs font-mono uppercase text-chalkDim mb-1.5">
                 Full name
@@ -81,7 +81,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="w-full bg-amber text-panel font-mono uppercase text-sm font-bold py-2.5 rounded hover:brightness-110 transition disabled:opacity-50"
+              className="w-full bg-amber text-metroPrimary font-mono uppercase text-sm font-bold py-2.5 rounded hover:brightness-110 transition disabled:opacity-50"
             >
               {status === 'sending' ? 'Sending link…' : 'Email me a sign-in link'}
             </button>
