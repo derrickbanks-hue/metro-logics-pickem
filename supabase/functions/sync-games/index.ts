@@ -18,7 +18,7 @@ const CFBD_API_KEY = Deno.env.get('CFBD_API_KEY')!
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
 const SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 const SEASON = Deno.env.get('PICKEM_SEASON') ?? '2026'
-+ const CONFERENCES = ['SEC', 'B1G'] // CFBD abbreviations for SEC and Big Ten
+const CONFERENCES = ['SEC', 'B1G'] // CFBD abbreviations for SEC and Big Ten
 
 Deno.serve(async (req: Request) => {
   try {
