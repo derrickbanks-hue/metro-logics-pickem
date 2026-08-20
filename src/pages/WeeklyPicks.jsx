@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { supabase, SEASON } from '../lib/supabaseClient'
 import GameCard from '../components/GameCard'
+import WeeklyStandingWidget from '../components/WeeklyStandingWidget'
 
 function pickDefaultWeek(games) {
   if (!games.length) return null
@@ -13,8 +14,9 @@ function pickDefaultWeek(games) {
   return weeks[weeks.length - 1]
 }
 
-export default function WeeklyPicks({ session }) {
+export default function WeeklyPicks({ session, profile }) {
   const userId = session.user.id
+  const firstName = (profile?.full_name ?? session.user.email ?? 'Your').split(' ')[0]
   const [games, setGames] = useState([])
   const [picks, setPicks] = useState({}) // game_id -> pick row
   const [teamColors, setTeamColors] = useState({}) // team name -> { primary_color, secondary_color }
@@ -101,16 +103,15 @@ export default function WeeklyPicks({ session }) {
 
   return (
     <div>
-      <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
+      <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
         <div>
           <h1 className="font-display font-bold text-3xl text-chalk tracking-wide">
-            WEEK {selectedWeek}
+            {firstName}&apos;S PICKS
           </h1>
-          {scoredSoFar > 0 && (
-            <p className="text-chalkDim text-sm font-mono mt-1">
-              {correctSoFar} / {scoredSoFar} correct so far
-            </p>
-          )}
+          <p className="text-chalkDim text-sm font-mono mt-1">
+            Week {selectedWeek}
+            {scoredSoFar > 0 && ` · ${correctSoFar}/${scoredSoFar} correct so far`}
+          </p>
         </div>
         <div className="flex items-center gap-3">
           {saveState === 'saving' && <span className="text-xs font-mono text-chalkDim">SAVING…</span>}
@@ -131,6 +132,8 @@ export default function WeeklyPicks({ session }) {
           )}
         </div>
       </div>
+
+      <WeeklyStandingWidget week={selectedWeek} userId={userId} />
 
       <div className="grid gap-3 sm:grid-cols-2">
         {weekGames.map((g) => (
