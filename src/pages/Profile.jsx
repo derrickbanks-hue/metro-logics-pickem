@@ -21,7 +21,7 @@ export default function Profile({ profile, onProfileChange }) {
   return (
     <div className="max-w-md">
       <h1 className="font-display font-bold text-3xl text-chalk tracking-wide mb-6">MY PROFILE</h1>
-      <div className="bg-panel border border-line rounded-md p-6 space-y-6">
+      <div className="bg-panel border border-line rounded-md shadow-sm p-6 space-y-6">
         <AvatarUpload
           userId={profile.id}
           avatarUrl={profile.avatar_url}
@@ -42,7 +42,7 @@ export default function Profile({ profile, onProfileChange }) {
           <button
             type="submit"
             disabled={saveState === 'saving'}
-            className="bg-amber text-panel font-mono uppercase text-sm font-bold px-4 py-2 rounded hover:brightness-110 transition disabled:opacity-50"
+            className="bg-amber text-metroPrimary font-mono uppercase text-sm font-bold px-4 py-2 rounded hover:brightness-110 transition disabled:opacity-50"
           >
             {saveState === 'saving' ? 'Saving…' : saveState === 'saved' ? 'Saved ✓' : 'Save changes'}
           </button>
