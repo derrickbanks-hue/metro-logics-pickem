@@ -36,7 +36,7 @@ export default function Login() {
             PICK<span className="text-amber">&apos;EM</span>
           </h1>
           <p className="text-chalkDim text-sm mt-2 font-mono">
-            METRO LOGICS · SEC + BIG TEN SEASON POOL
+            METRO LOGICS · SEC SEASON POOL
           </p>
         </div>
 
