@@ -22,7 +22,7 @@ export default function NavBar({ userEmail, profile }) {
         <div className="flex items-center gap-6 min-w-0">
           <MetroMark className="h-9 shrink-0" />
           <nav className="hidden sm:flex items-center gap-1">
-            <NavLink to="/" end className={linkClass}>This Week</NavLink>
+            <NavLink to="/" end className={linkClass}>My Picks</NavLink>
             <NavLink to="/leaderboard" className={linkClass}>Leaderboard</NavLink>
             <NavLink to="/history" className={linkClass}>My History</NavLink>
             {profile?.is_admin && (
@@ -51,7 +51,7 @@ export default function NavBar({ userEmail, profile }) {
         </div>
       </div>
       <nav className="sm:hidden flex items-center gap-1 px-4 pb-2 -mt-1 flex-wrap">
-        <NavLink to="/" end className={linkClass}>This Week</NavLink>
+        <NavLink to="/" end className={linkClass}>My Picks</NavLink>
         <NavLink to="/leaderboard" className={linkClass}>Leaderboard</NavLink>
         <NavLink to="/history" className={linkClass}>History</NavLink>
         {profile?.is_admin && <NavLink to="/admin" className={linkClass}>Admin</NavLink>}
