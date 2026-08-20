@@ -1,4 +1,5 @@
 import Countdown from './Countdown'
+import TeamHelmet from './TeamHelmet'
 
 function confAccent(conf) {
   if (conf === 'SEC') return 'bg-crimson'
@@ -6,19 +7,24 @@ function confAccent(conf) {
   return 'bg-line'
 }
 
-function TeamButton({ team, conference, points, isPicked, isWinner, isLoser, locked, onClick }) {
+function TeamButton({ team, conference, points, colors, isPicked, isWinner, isLoser, locked, onClick }) {
   return (
     <button
       type="button"
       disabled={locked}
       onClick={onClick}
-      className={`flex-1 flex items-center justify-between gap-3 rounded px-4 py-3 border text-left transition
-        ${isPicked ? 'border-amber bg-amber/10' : 'border-line bg-panelLight hover:border-chalkDim'}
+      className={`flex-1 flex items-center justify-between gap-2 rounded px-3 py-3 border text-left transition
+        ${isPicked ? 'border-amber bg-amber/10' : 'border-line bg-panelLight hover:border-chalkDim/40'}
         ${isLoser ? 'opacity-50' : ''}
         ${locked && !isPicked ? 'cursor-default' : ''}
       `}
     >
       <span className="flex items-center gap-2 min-w-0">
+        <TeamHelmet
+          primary={colors?.primary_color || '#5C7085'}
+          secondary={colors?.secondary_color || '#FFFFFF'}
+          className="w-7 h-6 shrink-0"
+        />
         <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${confAccent(conference)}`} />
         <span className={`truncate font-medium ${isWinner ? 'text-amber' : 'text-chalk'}`}>
           {team}
@@ -31,7 +37,7 @@ function TeamButton({ team, conference, points, isPicked, isWinner, isLoser, loc
   )
 }
 
-export default function GameCard({ game, pick, onPick }) {
+export default function GameCard({ game, pick, onPick, teamColors = {} }) {
   const locked = game.status !== 'scheduled' || new Date(game.start_date) <= new Date()
   const isFinal = game.status === 'final'
   const pickedTeam = pick?.picked_team ?? null
@@ -44,7 +50,7 @@ export default function GameCard({ game, pick, onPick }) {
   })
 
   return (
-    <div className="bg-panel border border-line rounded-md overflow-hidden">
+    <div className="bg-panel border border-line rounded-md overflow-hidden shadow-sm">
       <div className="flex items-center justify-between px-4 pt-3 pb-1">
         <span className="font-mono text-xs text-chalkDim">{kickoffLabel}</span>
         {isFinal ? (
@@ -60,6 +66,7 @@ export default function GameCard({ game, pick, onPick }) {
           team={game.away_team}
           conference={game.away_conference}
           points={isFinal ? game.away_points : null}
+          colors={teamColors[game.away_team]}
           isPicked={pickedTeam === game.away_team}
           isWinner={isFinal && game.winner === game.away_team}
           isLoser={isFinal && game.winner && game.winner !== game.away_team}
@@ -71,6 +78,7 @@ export default function GameCard({ game, pick, onPick }) {
           team={game.home_team}
           conference={game.home_conference}
           points={isFinal ? game.home_points : null}
+          colors={teamColors[game.home_team]}
           isPicked={pickedTeam === game.home_team}
           isWinner={isFinal && game.winner === game.home_team}
           isLoser={isFinal && game.winner && game.winner !== game.home_team}
