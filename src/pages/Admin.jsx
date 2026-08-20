@@ -88,7 +88,7 @@ export default function Admin() {
         </span>
       </div>
 
-      <div className="bg-panel border border-line rounded-md overflow-hidden mb-6">
+      <div className="bg-panel border border-line rounded-md overflow-hidden shadow-sm mb-6">
         <div className="px-4 py-3 border-b border-line font-mono text-xs uppercase text-chalkDim">
           This week&apos;s results
         </div>
@@ -111,7 +111,7 @@ export default function Admin() {
         </div>
       </div>
 
-      <div className="bg-panel border border-line rounded-md overflow-hidden mb-6">
+      <div className="bg-panel border border-line rounded-md overflow-hidden shadow-sm mb-6">
         <div className="px-4 py-3 border-b border-line font-mono text-xs uppercase text-chalkDim">
           Weekly standings preview
         </div>
@@ -135,7 +135,7 @@ export default function Admin() {
       <button
         onClick={sendRecap}
         disabled={sendState === 'sending' || finalCount === 0}
-        className="bg-amber text-panel font-mono uppercase text-sm font-bold px-5 py-2.5 rounded hover:brightness-110 transition disabled:opacity-50"
+        className="bg-amber text-metroPrimary font-mono uppercase text-sm font-bold px-5 py-2.5 rounded hover:brightness-110 transition disabled:opacity-50"
       >
         {sendState === 'sending' ? 'Sending…' : `Send Week ${selectedWeek} recap to everyone`}
       </button>
