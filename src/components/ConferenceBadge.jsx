@@ -6,12 +6,12 @@ import FootballIcon from './FootballIcon'
 export default function ConferenceBadge({ label, className = 'w-24 h-24' }) {
   return (
     <div
-      className={`flex flex-col items-center justify-center gap-1 rounded-full border-4 border-amber bg-white shadow-md ${className}`}
+      className={`flex flex-col items-center justify-center gap-2 rounded-full border-4 border-amber bg-white shadow-lg ${className}`}
     >
-      <span className="font-display font-bold text-metroPrimary tracking-wide text-xs text-center leading-tight px-2">
+      <span className="font-display font-bold text-metroPrimary tracking-wide text-lg text-center leading-tight px-3">
         {label}
       </span>
-      <FootballIcon className="w-6 h-3.5" />
+      <FootballIcon className="w-10 h-6" />
     </div>
   )
 }
