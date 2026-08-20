@@ -67,7 +67,7 @@ export default function App() {
         </Routes>
       </main>
       <footer className="text-center text-xs text-chalkDim/60 font-mono py-6">
-        METRO LOGICS PICK&apos;EM · SEC + BIG TEN
+        METRO LOGICS PICK&apos;EM · SEC
       </footer>
     </div>
   )
