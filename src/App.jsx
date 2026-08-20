@@ -52,7 +52,7 @@ export default function App() {
       <SideRail side="right" />
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8">
         <Routes>
-          <Route path="/" element={<WeeklyPicks session={session} />} />
+          <Route path="/" element={<WeeklyPicks session={session} profile={profile} />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/history" element={<MyHistory session={session} />} />
           <Route
