@@ -44,7 +44,7 @@ export default function Leaderboard() {
       <h1 className="font-display font-bold text-3xl text-chalk tracking-wide mb-6">
         SEASON STANDINGS
       </h1>
-      <div className="bg-panel border border-line rounded-md overflow-hidden">
+      <div className="bg-panel border border-line rounded-md overflow-hidden shadow-sm">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-line text-chalkDim font-mono text-xs uppercase">
