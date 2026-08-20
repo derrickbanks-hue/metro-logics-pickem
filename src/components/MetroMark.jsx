@@ -8,10 +8,10 @@ export default function MetroMark({ className = 'h-9' }) {
     <div className={`flex items-center gap-2.5 ${className}`}>
       <img src={metroIcon} alt="Metro Logics" className="h-full w-auto shrink-0" />
       <div className="flex flex-col leading-none justify-center">
-        <span className="font-display font-bold text-chalk text-sm tracking-wide">
+        <span className="font-display font-bold text-metroAccentWhite text-sm tracking-wide">
           METRO LOGICS
         </span>
-        <span className="font-display font-bold text-metroSecondary text-[11px] tracking-widest">
+        <span className="font-display font-bold text-amber text-[11px] tracking-widest">
           PICK&apos;EM
         </span>
       </div>
