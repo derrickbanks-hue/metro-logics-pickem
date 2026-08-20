@@ -2,9 +2,7 @@ import Countdown from './Countdown'
 import TeamHelmet from './TeamHelmet'
 
 function confAccent(conf) {
-  if (conf === 'SEC') return 'bg-crimson'
-  if (conf === 'Big Ten') return 'bg-steel'
-  return 'bg-line'
+  return conf === 'SEC' ? 'bg-crimson' : 'bg-line'
 }
 
 function TeamButton({ team, conference, points, colors, isPicked, isWinner, isLoser, locked, onClick }) {
