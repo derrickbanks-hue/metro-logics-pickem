@@ -2,18 +2,22 @@ import { NavLink } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import MetroMark from './MetroMark'
 
+// This bar stays navy regardless of the light body theme (matches the
+// header treatment on Metro's letterhead/business cards), so its text
+// colors are set explicitly here rather than via the flipped chalk/line
+// tokens the rest of the app uses.
 const linkClass = ({ isActive }) =>
   `px-3 py-1.5 text-sm font-mono tracking-wide uppercase transition-colors border-b-2 ${
     isActive
       ? 'text-amber border-amber'
-      : 'text-chalkDim border-transparent hover:text-chalk hover:border-line'
+      : 'text-metroAccentWhite/60 border-transparent hover:text-metroAccentWhite hover:border-metroAccentWhite/30'
   }`
 
 export default function NavBar({ userEmail, profile }) {
   const initial = (profile?.full_name ?? userEmail ?? '?').charAt(0).toUpperCase()
 
   return (
-    <header className="border-b border-line bg-panel/80 backdrop-blur sticky top-0 z-10">
+    <header className="bg-navyBar sticky top-0 z-10 shadow-md">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
         <div className="flex items-center gap-6 min-w-0">
           <MetroMark className="h-9 shrink-0" />
@@ -28,11 +32,11 @@ export default function NavBar({ userEmail, profile }) {
         </div>
         <div className="flex items-center gap-3 shrink-0">
           <NavLink to="/profile" title="My profile">
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-line bg-panelLight">
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-metroAccentWhite/30 bg-white/10">
               {profile?.avatar_url ? (
                 <img src={profile.avatar_url} alt="" className="w-full h-full object-cover" />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-[10px] text-chalkDim font-mono">
+                <div className="w-full h-full flex items-center justify-center text-[10px] text-metroAccentWhite/80 font-mono">
                   {initial}
                 </div>
               )}
@@ -40,7 +44,7 @@ export default function NavBar({ userEmail, profile }) {
           </NavLink>
           <button
             onClick={() => supabase.auth.signOut()}
-            className="text-xs font-mono uppercase text-chalkDim hover:text-amber transition-colors"
+            className="text-xs font-mono uppercase text-metroAccentWhite/60 hover:text-amber transition-colors"
           >
             Sign out
           </button>
