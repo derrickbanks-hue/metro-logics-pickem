@@ -11,18 +11,23 @@ export default {
         metroAccent: '#C18447',
         metroNeutral: '#F2F3F2',
         metroAccentWhite: '#FBFAF2',
-        // App tokens mapped onto the brand palette, kept football-friendly
-        // via a subtle yard-line texture (see index.css) and the accent
-        // (leather/pigskin) tone used for CTAs.
-        turf: '#002447',
-        panel: '#012C57',
-        panelLight: '#0B3D6E',
-        chalk: '#FBFAF2',
-        chalkDim: '#9FB3C8',
+        // App tokens: bright, white-forward theme per Derrick's request,
+        // built entirely from the official palette above. Navy is pulled
+        // back to text and the header bar; gold (accent) and blue
+        // (secondary) carry the color now instead of a dark navy wash.
+        turf: '#FBFAF2',
+        panel: '#FFFFFF',
+        panelLight: '#F2F3F2',
+        chalk: '#002447',
+        chalkDim: '#5C7085',
         amber: '#C18447',
         crimson: '#A5322F',
         steel: '#008FD4',
-        line: '#0B3D6E',
+        line: '#E2DFD3',
+        // Navy stays available directly for the header bar, which keeps
+        // the dark navy treatment used on Metro's letterhead and business
+        // cards, even though the rest of the app is now light.
+        navyBar: '#002447',
       },
       fontFamily: {
         // Poppins per brand guidelines: Bold for headings/CTAs, Regular for
