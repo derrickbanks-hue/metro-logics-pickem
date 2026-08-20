@@ -14,7 +14,7 @@ export default function SideRail({ side }) {
       }`}
     >
       <FootballIcon className="w-16 h-10 -rotate-12 opacity-80" />
-      <ConferenceBadge label={isLeft ? 'SEC' : 'BIG TEN'} className="w-48 h-48" />
+      <ConferenceBadge label="SEC" className="w-48 h-48" />
       <FootballIcon className="w-16 h-10 rotate-12 opacity-80" />
     </div>
   )
