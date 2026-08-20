@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { supabase } from './lib/supabaseClient'
 import NavBar from './components/NavBar'
+import SideRail from './components/SideRail'
 import Login from './pages/Login'
 import WeeklyPicks from './pages/WeeklyPicks'
 import Leaderboard from './pages/Leaderboard'
@@ -47,6 +48,8 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar userEmail={session.user.email} profile={profile} />
+      <SideRail side="left" />
+      <SideRail side="right" />
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8">
         <Routes>
           <Route path="/" element={<WeeklyPicks session={session} />} />
