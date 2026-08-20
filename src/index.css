@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-turf text-chalk font-body antialiased;
+  /* Faint yard-line hatch: evenly spaced horizontal lines like a football
+     field, with a light vertical hash every 40px. Subtle by design. */
+  background-image:
+    repeating-linear-gradient(
+      180deg,
+      rgba(251, 250, 242, 0.035) 0px,
+      rgba(251, 250, 242, 0.035) 1px,
+      transparent 1px,
+      transparent 64px
+    ),
+    linear-gradient(90deg, rgba(251, 250, 242, 0.02) 1px, transparent 1px);
+  background-size: 100% 64px, 40px 100%;
+}
+
+::selection {
+  background: #c18447;
+  color: #002447;
+}
+
+:focus-visible {
+  outline: 2px solid #c18447;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
