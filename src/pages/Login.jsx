@@ -47,14 +47,23 @@ export default function Login() {
     e.preventDefault()
     setStatus('verifying')
     setErrorMsg('')
-    const { error } = await supabase.auth.verifyOtp({ email, token: code, type: 'email' })
-    if (error) {
-      setStatus('error')
-      setErrorMsg(error.message)
-      return
+
+    // Depending on whether this account already existed elsewhere in this
+    // shared Supabase project, Supabase may have issued this code under a
+    // different internal flow than a plain sign-in (commonly "recovery"
+    // for already-confirmed existing users, "email" for brand new ones).
+    // There's no way to know in advance which one applies, so try both.
+    const typesToTry = ['email', 'recovery']
+    let lastError = null
+
+    for (const type of typesToTry) {
+      const { error } = await supabase.auth.verifyOtp({ email, token: code, type })
+      if (!error) return // success, App.jsx's auth listener takes over from here
+      lastError = error
     }
-    // On success, App.jsx's auth listener picks up the new session
-    // automatically and swaps this page out, nothing else to do here.
+
+    setStatus('error')
+    setErrorMsg(lastError?.message ?? 'Verification failed')
   }
 
   return (
@@ -121,12 +130,12 @@ export default function Login() {
                 type="text"
                 inputMode="numeric"
                 autoComplete="one-time-code"
-                maxLength={6}
+                maxLength={10}
                 required
                 value={code}
-                onChange={(e) => setCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                onChange={(e) => setCode(e.target.value.replace(/\D/g, '').slice(0, 10))}
                 placeholder="123456"
-                className="w-full bg-panelLight border border-line rounded px-3 py-3 text-chalk text-center text-2xl font-mono tracking-[0.4em] focus:border-amber outline-none"
+                className="w-full bg-panelLight border border-line rounded px-3 py-3 text-chalk text-center text-2xl font-mono tracking-[0.3em] focus:border-amber outline-none"
               />
             </div>
             {status === 'error' && (
@@ -134,7 +143,7 @@ export default function Login() {
             )}
             <button
               type="submit"
-              disabled={status === 'verifying' || code.length !== 6}
+              disabled={status === 'verifying' || code.length < 6}
               className="w-full bg-amber text-metroPrimary font-mono uppercase text-sm font-bold py-2.5 rounded hover:brightness-110 transition disabled:opacity-50"
             >
               {status === 'verifying' ? 'Verifying…' : 'Verify & sign in'}
